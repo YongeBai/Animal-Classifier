@@ -1,0 +1,17 @@
+#display-image{
+    width: 400px;
+    height: 225px;
+    background-position: center;
+    background-size: cover;
+  }
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body {
+    background-color: rgb(18, 18, 18);
+    color: whitesmoke;
+}
