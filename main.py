@@ -1,24 +1,20 @@
-from flask import Flask, render_template, send_from_directory, url_for
-from flask_uploads import UploadSet, IMAGES, configure_uploads
-
+from flask import Flask, render_template, request
+from detector import AnimalCLassifier
 
 app = Flask(__name__)
-app.secret_key='secret_key'
-app.config['UPLOADED_IMG'] = 'uploads'
 
-photos = UploadSet('images', IMAGES)
-configure_uploads(app, photos)
-
-@app.route('/uploads/<filename>')
-def get_file(filename):
-    return send_from_directory(app.config['UPLOADED_IMG'], filename)
+detector = AnimalCLassifier()
 
 @app.route('/', methods=['GET', 'POST'])
 def upload():
-    filename = photos.save(photos.data)
-    file_url = url_for('get_file', filename=filename)
-    return render_template('index.html', file_url=file_url)
+    if request.method == "POST":
+        filename = request.files['image']
+        file_path = "./uploads/" + filename.filename  
+        filename.save(file_path)
+        img = detector.detect('uploads', filename.filename)
+        return render_template('index.html', img=img)
 
+    return render_template('index.html')
 if __name__ == '__main__':
     app.run(debug=True)
 

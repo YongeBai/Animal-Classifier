@@ -1,6 +1,7 @@
 import torch
 import cv2 as cv
 import numpy as np
+import os
 
 class AnimalCLassifier:
     def __init__(self) -> None:
@@ -17,12 +18,11 @@ class AnimalCLassifier:
         print("Device: ", self.device)
 
 
-    def detect(self, input_image):
-        img_bgr = cv.imread(input_image)
+    def detect(self, folder, input_image):
+        img_bgr = cv.imread((os.path.join(folder,input_image)))
         img_rgb = cv.cvtColor(img_bgr, cv.COLOR_BGR2RGB)
         results = self.model(img_rgb)
-        results.show()
+        return results.save()
 
-
-detector = AnimalCLassifier()
-detector.detect("cat.png")
+# detector = AnimalCLassifier()
+# detector.detect('uploads', 'cat.png')
