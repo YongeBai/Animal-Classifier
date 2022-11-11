@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from detector import AnimalCLassifier
-import os
 
 app = Flask(__name__)
 
