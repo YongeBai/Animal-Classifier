@@ -13,9 +13,8 @@ def upload():
         file_path = "./uploads/" + filename.filename  
         filename.save(file_path)
         prediction, animal = detector.detect('uploads', filename.filename)
-        img = os.path.join(file_path, filename.filename)
-        return render_template('index.html', prediction=prediction, animal=animal, img=img)
+        return render_template('index.html', prediction=prediction, animal=animal)
 
     return render_template('index.html')
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
