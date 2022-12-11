@@ -1,4 +1,4 @@
-### Animal classifier using YOLOv5
+# Animal classifier using YOLOv5
 
 This project uses the YOLOv5 object detection model to detect animals in an image. The project provides a simple Flask app that allows the user to upload an image and see the detected animals in it.
 
